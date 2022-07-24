@@ -1,1 +1,1 @@
-
+Refactored with TypeScript
