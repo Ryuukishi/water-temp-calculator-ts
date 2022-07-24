@@ -1,4 +1,13 @@
-const TemperatureInput = ({ scale, temperature, onTemperatureChange }) => {
+import React from "react";
+
+interface Props {
+  scale: "c" | "f";
+  temperature?: string;
+  onTemperatureChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const TemperatureInput = ({ scale, temperature, onTemperatureChange }: Props) => {
+
   const scaleNames = {
     c: "Celsius",
     f: "Fahrenheit",

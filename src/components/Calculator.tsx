@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import BoilingVerdict from "./BoilingVerdict";
 import TemperatureInput from "./TemperatureInput";
 
@@ -7,7 +7,7 @@ const Calculator = () => {
 
   const [fahrenheit, setFahrenheit] = useState("");
 
-  const convertTemp = (temperature, scale) => {
+  const convertTemp = (temperature: number, scale: "celsius" | "fahrenheit"): string => {
     let newTemp = "";
     switch (scale) {
       case "celsius":
@@ -26,24 +26,25 @@ const Calculator = () => {
     return newTemp;
   };
 
-  const handleCelsiusChange = (event) => {
-    console.log(event.target.value);
-    if (!event.target.value || !event.target.value.trim()) {
+  const handleCelsiusChange = (event: {target: {value: string}}): void => {
+    const temp: number = +event.target.value
+    if (!temp) {
       setFahrenheit("");
       setCelsius("");
-    } else if (!isNaN(event.target.value)) {
+    } else {
       setCelsius(event.target.value);
-      setFahrenheit(convertTemp(event.target.value, "fahrenheit"));
+      setFahrenheit(convertTemp(+temp, "fahrenheit"));
     }
   };
 
-  const handleFahrenheitChange = (event) => {
-    if (!event.target.value || !event.target.value.trim()) {
+  const handleFahrenheitChange = (event: {target: {value: string}}): void => {
+    const temp: number = +event.target.value
+    if (!temp) {
       setFahrenheit("");
       setCelsius("");
-    } else if (!isNaN(event.target.value)) {
+    } else if (!isNaN(temp)) {
       setFahrenheit(event.target.value);
-      setCelsius(convertTemp(event.target.value, "celsius"));
+      setCelsius(convertTemp(temp, "celsius"));
     }
   };
 
